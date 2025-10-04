@@ -30,6 +30,7 @@ import {
 } from 'lucide-react'
 import logoImage from './assets/logo.jpeg'
 import videoBackground from './assets/climatisation-guadeloupe.mp4'
+import reparationImage from './assets/reparation-climatisation-guadeloupe.webp'
 import './App.css'
 
 function App() {
@@ -396,9 +397,7 @@ function App() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div {...fadeInUp}>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Votre expert en{' '}
-                <span className="text-blue-200">climatisation</span> et{' '}
-                <span className="text-green-200">confort</span> en Guadeloupe
+                Expert Climatisation Guadeloupe : Installation, Réparation, Entretien
               </h1>
               <p className="text-xl text-blue-100 mb-8 leading-relaxed">
                 CLIMKÉRA est une entreprise locale spécialisée dans l'installation, l'entretien et le dépannage de systèmes de climatisation, adaptée aux besoins des particuliers et professionnels en Guadeloupe.
@@ -462,11 +461,14 @@ function App() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Nous proposons une large gamme de climatiseurs performants, silencieux et économiques
             </p>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
-              Nos experts sélectionnent pour vous les meilleurs équipements adaptés à votre espace et à votre budget. 
-              Chaque installation est réalisée avec soin par notre équipe certifiée pour garantir votre confort et votre sécurité. 
-              Profitez d'une fraîcheur optimale toute l'année grâce à nos solutions sur mesure.
-            </p>
+            <div className="mt-8">
+              <img src={reparationImage} alt="Réparation climatisation Guadeloupe" className="w-[600px] h-auto mx-auto rounded-lg shadow-lg mb-6" />
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Nos experts sélectionnent pour vous les meilleurs équipements adaptés à votre espace et à votre budget. 
+                Chaque installation est réalisée avec soin par notre équipe certifiée pour garantir votre confort et votre sécurité. 
+                Profitez d'une fraîcheur optimale toute l'année grâce à nos solutions sur mesure.
+              </p>
+            </div>
           </motion.div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1139,7 +1141,7 @@ function App() {
               </p>
               <div className="flex gap-4">
                 <Facebook className="w-6 h-6 text-blue-400 hover:text-blue-300 cursor-pointer" />
-                <Instagram className="w-6 h-6 text-pink-400 hover:text-pink-300 cursor-pointer" />
+                <Instagram className="w-6 h-6 text-pink-400 hover:text-pink-330 cursor-pointer" />
                 <Linkedin className="w-6 h-6 text-blue-400 hover:text-blue-300 cursor-pointer" />
                 <Twitter className="w-6 h-6 text-blue-400 hover:text-blue-300 cursor-pointer" />
               </div>
@@ -1179,7 +1181,8 @@ function App() {
           </div>
           
           <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 CLIMKÉRA. Tous droits réservés.</p>
+            <p>&copy; 2025 CLIMKÉRA. Tous droits réservés.</p>
+            <p className="mt-2 text-sm">Site réalisé par <a href="https://innotech-it.fr" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">innotech-it.fr</a> et <a href="https://ollabot.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">ollabot.com</a></p>
           </div>
         </div>
       </footer>
