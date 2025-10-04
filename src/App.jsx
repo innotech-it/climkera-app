@@ -462,6 +462,11 @@ function App() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Nous proposons une large gamme de climatiseurs performants, silencieux et économiques
             </p>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+              Nos experts sélectionnent pour vous les meilleurs équipements adaptés à votre espace et à votre budget. 
+              Chaque installation est réalisée avec soin par notre équipe certifiée pour garantir votre confort et votre sécurité. 
+              Profitez d'une fraîcheur optimale toute l'année grâce à nos solutions sur mesure.
+            </p>
           </motion.div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
