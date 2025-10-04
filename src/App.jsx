@@ -36,6 +36,7 @@ function App() {
   const [hoveredCard, setHoveredCard] = useState(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openFaqIndex, setOpenFaqIndex] = useState(0) // Only first FAQ open by default
+  const [showThankYou, setShowThankYou] = useState(false)
   const [formData, setFormData] = useState({
     nom: '',
     telephone: '',
@@ -194,10 +195,52 @@ function App() {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Formulaire soumis:', formData)
-    // Ici vous pourriez ajouter la logique d'envoi du formulaire
+  const handleSubmit = async (e) => {
+    // Prevent default form submission
+    e.preventDefault();
+    
+    // Create form data object
+    const formDataObj = new FormData(e.target);
+    
+    try {
+      // Submit form to Formspree using fetch
+      const response = await fetch('https://formspree.io/f/xzzjvdgn', {
+        method: 'POST',
+        body: formDataObj,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        // Show thank you page
+        setShowThankYou(true);
+      } else {
+        // Handle error
+        alert('Une erreur s\'est produite lors de l\'envoi du formulaire. Veuillez réessayer.');
+      }
+    } catch (error) {
+      // Handle network error
+      alert('Une erreur s\'est produite lors de l\'envoi du formulaire. Veuillez réessayer.');
+      console.error('Error:', error);
+    }
+    
+    // Reset form after a delay
+    setTimeout(() => {
+      setFormData({
+        nom: '',
+        telephone: '',
+        email: '',
+        adresse: '',
+        departement: '',
+        message: '',
+        typeService: '',
+        produit: '',
+        dateSouhaitee: '',
+        heureSouhaitee: '',
+        accepteConditions: false
+      });
+    }, 3000);
   }
 
   // Simple avatar component
@@ -676,6 +719,7 @@ function App() {
                       <label htmlFor="nom" className="block text-sm font-medium text-gray-700">Nom complet *</label>
                       <input
                         id="nom"
+                        name="nom"
                         value={formData.nom}
                         onChange={(e) => handleInputChange('nom', e.target.value)}
                         required
@@ -686,6 +730,7 @@ function App() {
                       <label htmlFor="telephone" className="block text-sm font-medium text-gray-700">Téléphone *</label>
                       <input
                         id="telephone"
+                        name="telephone"
                         type="tel"
                         value={formData.telephone}
                         onChange={(e) => handleInputChange('telephone', e.target.value)}
@@ -700,6 +745,7 @@ function App() {
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email *</label>
                       <input
                         id="email"
+                        name="email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
@@ -711,6 +757,7 @@ function App() {
                       <label htmlFor="departement" className="block text-sm font-medium text-gray-700">Département</label>
                       <select 
                         id="departement"
+                        name="departement"
                         onChange={(e) => handleInputChange('departement', e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       >
@@ -726,6 +773,7 @@ function App() {
                     <label htmlFor="adresse" className="block text-sm font-medium text-gray-700">Adresse</label>
                     <input
                       id="adresse"
+                      name="adresse"
                       value={formData.adresse}
                       onChange={(e) => handleInputChange('adresse', e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -737,6 +785,7 @@ function App() {
                       <label htmlFor="typeService" className="block text-sm font-medium text-gray-700">Type de service *</label>
                       <select 
                         id="typeService"
+                        name="typeService"
                         onChange={(e) => handleInputChange('typeService', e.target.value)}
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -752,6 +801,7 @@ function App() {
                       <label htmlFor="produit" className="block text-sm font-medium text-gray-700">Produit concerné *</label>
                       <select 
                         id="produit"
+                        name="produit"
                         onChange={(e) => handleInputChange('produit', e.target.value)}
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -771,6 +821,7 @@ function App() {
                       <label htmlFor="dateSouhaitee" className="block text-sm font-medium text-gray-700">Date souhaitée *</label>
                       <input
                         id="dateSouhaitee"
+                        name="dateSouhaitee"
                         type="date"
                         value={formData.dateSouhaitee}
                         onChange={(e) => handleInputChange('dateSouhaitee', e.target.value)}
@@ -782,6 +833,7 @@ function App() {
                       <label htmlFor="heureSouhaitee" className="block text-sm font-medium text-gray-700">Heure souhaitée *</label>
                       <select 
                         id="heureSouhaitee"
+                        name="heureSouhaitee"
                         onChange={(e) => handleInputChange('heureSouhaitee', e.target.value)}
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -798,6 +850,7 @@ function App() {
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
                     <textarea
                       id="message"
+                      name="message"
                       rows={4}
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
@@ -809,6 +862,7 @@ function App() {
                   <div className="flex items-center space-x-2">
                     <input
                       id="conditions"
+                      name="conditions"
                       type="checkbox"
                       checked={formData.accepteConditions}
                       onChange={(e) => handleInputChange('accepteConditions', e.target.checked)}
@@ -938,6 +992,46 @@ function App() {
         </div>
       </motion.section>
 
+      {/* Thank You Page */}
+      {showThankYou && (
+        <motion.section 
+          className="py-20 px-4 bg-gray-50 min-h-screen flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="max-w-2xl mx-auto text-center">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <CheckCircle className="w-24 h-24 text-green-500 mx-auto mb-6" />
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Merci pour votre demande !</h2>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                Votre demande de rendez-vous a été envoyée avec succès. Notre équipe vous contactera dans les plus brefs délais.
+              </p>
+              <div className="bg-white rounded-lg shadow-lg p-6 mb-8 text-left max-w-md mx-auto">
+                <h3 className="text-xl font-bold mb-4 text-gray-800">Récapitulatif de votre demande :</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li><strong>Nom :</strong> {formData.nom}</li>
+                  <li><strong>Téléphone :</strong> {formData.telephone}</li>
+                  <li><strong>Email :</strong> {formData.email}</li>
+                  <li><strong>Type de service :</strong> {formData.typeService}</li>
+                  <li><strong>Date souhaitée :</strong> {formData.dateSouhaitee}</li>
+                </ul>
+              </div>
+              <button 
+                onClick={() => setShowThankYou(false)}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-md transition-colors text-lg"
+              >
+                Retour à l'accueil
+              </button>
+            </motion.div>
+          </div>
+        </motion.section>
+      )}
+
       {/* Nos coordonnées */}
       <motion.section 
         className="py-20 px-4 bg-gray-50"
@@ -1013,7 +1107,7 @@ function App() {
               className="h-96 rounded-lg overflow-hidden"
             >
               <iframe 
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-61.565,16.251,-61.558,16.256&amp;layer=mapnik&amp;marker=16.2531281,-61.5614545" 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-61.562,16.252,-61.560,16.254&amp;layer=mapnik&amp;marker=16.2531281,-61.5614545#map=17/16.2531281/-61.5614545" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 'none' }}
