@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Phone, 
   Mail, 
@@ -24,7 +24,9 @@ import {
   Instagram, 
   Linkedin, 
   Twitter, 
-  HelpCircle 
+  HelpCircle,
+  Menu,
+  X
 } from 'lucide-react'
 import logoImage from './assets/logo.jpeg'
 import videoBackground from './assets/climatisation-guadeloupe.mp4'
@@ -32,6 +34,8 @@ import './App.css'
 
 function App() {
   const [hoveredCard, setHoveredCard] = useState(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [openFaqIndex, setOpenFaqIndex] = useState(0) // Only first FAQ open by default
   const [formData, setFormData] = useState({
     nom: '',
     telephone: '',
@@ -128,17 +132,20 @@ function App() {
     {
       nom: "Marie Dubois",
       avis: "Service exceptionnel! Installation rapide et efficace. Je recommande CLIMKÉRA pour tous vos besoins en climatisation.",
-      note: 5
+      note: 5,
+      avatar: "MD"
     },
     {
       nom: "Jean Dembélé",
       avis: "Le chauffe-eau thermodynamique est une merveille. J'ai divisé ma facture d'électricité par deux. Merci !",
-      note: 5
+      note: 5,
+      avatar: "JD"
     },
     {
       nom: "Sophie Martin",
       avis: "Très satisfaite de mon brasseur d'air. Silencieux et performant. Service au top.",
-      note: 5
+      note: 5,
+      avatar: "SM"
     }
   ]
 
@@ -193,6 +200,29 @@ function App() {
     // Ici vous pourriez ajouter la logique d'envoi du formulaire
   }
 
+  // Simple avatar component
+  const Avatar = ({ initials, className = "" }) => {
+    const colors = [
+      "bg-blue-500",
+      "bg-green-500",
+      "bg-purple-500",
+      "bg-yellow-500",
+      "bg-pink-500",
+      "bg-indigo-500"
+    ];
+    
+    const getRandomColor = (name) => {
+      const charIndex = name.charCodeAt(0) || 0;
+      return colors[charIndex % colors.length];
+    };
+    
+    return (
+      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ${getRandomColor(initials)} ${className}`}>
+        {initials}
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header / Navigation */}
@@ -206,6 +236,8 @@ function App() {
           <div className="flex items-center gap-2">
             <img src={logoImage} alt="CLIMKÉRA" className="h-10 w-auto" />
           </div>
+          
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <a href="#accueil" className="text-gray-700 hover:text-blue-600 transition-colors">Accueil</a>
             <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
@@ -213,8 +245,88 @@ function App() {
             <a href="#temoignages" className="text-gray-700 hover:text-blue-600 transition-colors">Témoignages</a>
             <a href="#faq" className="text-gray-700 hover:text-blue-600 transition-colors">FAQ</a>
             <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+            <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">Prise de rendez-vous</a>
           </nav>
+          
+          {/* Mobile menu button */}
+          <button 
+            className="md:hidden text-gray-700 focus:outline-none"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
+        
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className="md:hidden bg-white border-t"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="px-4 py-2 space-y-1">
+                <a 
+                  href="#accueil" 
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Accueil
+                </a>
+                <a 
+                  href="#services" 
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Services
+                </a>
+                <a 
+                  href="#packs" 
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Packs
+                </a>
+                <a 
+                  href="#temoignages" 
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Témoignages
+                </a>
+                <a 
+                  href="#faq" 
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  FAQ
+                </a>
+                <a 
+                  href="#contact" 
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
+              <div className="px-4 py-4 border-t border-gray-200">
+                <a 
+                  href="#contact" 
+                  className="block w-full bg-blue-600 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Prise de rendez-vous
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.header>
 
       {/* Hero Section */}
@@ -508,15 +620,18 @@ function App() {
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="h-full hover:shadow-xl transition-all duration-300 bg-white rounded-lg p-6">
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      {[...Array(temoignage.note)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                      ))}
+                  <div className="flex items-center gap-3 mb-4">
+                    <Avatar initials={temoignage.avatar} />
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-8800">
+                        {temoignage.nom}
+                      </h3>
+                      <div className="flex items-center gap-1">
+                        {[...Array(temoignage.note)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-800">
-                      {temoignage.nom}
-                    </h3>
                   </div>
                   <div>
                     <p className="text-gray-600 italic leading-relaxed">
@@ -790,17 +905,30 @@ function App() {
           <motion.div variants={fadeInUp} className="space-y-4">
             {faqItems.map((item, index) => (
               <div key={index} className="border border-gray-200 rounded-lg">
-                <div className="p-4 bg-gray-50 rounded-t-lg">
+                <button
+                  className="w-full p-4 bg-gray-50 rounded-t-lg text-left flex justify-between items-center"
+                  onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                >
                   <h3 className="text-lg font-semibold text-gray-800 flex items-center">
                     <HelpCircle className="w-5 h-5 mr-3 text-blue-500" />
                     {item.question}
                   </h3>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-700 pl-8 leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
+                  <svg 
+                    className={`w-5 h-5 text-gray-500 transform transition-transform ${openFaqIndex === index ? 'rotate-180' : ''}`}
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {openFaqIndex === index && (
+                  <div className="p-4 bg-white rounded-b-lg">
+                    <p className="text-gray-700 pl-8 leading-relaxed">
+                      {item.answer}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </motion.div>
@@ -890,7 +1018,7 @@ function App() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <img src={logoImage} alt="CLIMKÉRA" className="h-12 w-auto mb-4 brightness-0 invert" />
+              <img src={logoImage} alt="CLIMKÉRA" className="h-12 w-auto mb-4" />
               <p className="text-gray-300 mb-4">
                 Votre expert en climatisation et confort en Guadeloupe.
               </p>
@@ -905,32 +1033,32 @@ function App() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>Climatisation</li>
-                <li>Chauffe-eau solaire</li>
-                <li>Chauffe-eau thermodynamique</li>
-                <li>Brasseurs d'air</li>
-                <li>Caméras de vidéosurveillance</li>
-                <li>Location de climatiseur mobile</li>
-                <li>Contrats d'entretien</li>
+                <li><a href="#services" className="hover:text-white transition-colors">Climatisation</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Chauffe-eau solaire</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Chauffe-eau thermodynamique</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Brasseurs d'air</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Caméras de vidéosurveillance</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Location de climatiseur mobile</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Contrats d'entretien</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="text-lg font-semibold mb-4">À propos</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>Qui sommes-nous</li>
-                <li>Nos réalisations</li>
-                <li>FAQ</li>
-                <li>Contact</li>
+                <li><a href="#accueil" className="hover:text-white transition-colors">Qui sommes-nous</a></li>
+                <li><a href="#temoignages" className="hover:text-white transition-colors">Nos réalisations</a></li>
+                <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
+                <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="text-lg font-semibold mb-4">Mentions Légales</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>Politique de confidentialité</li>
-                <li>CGV</li>
-                <li>Contact</li>
+                <li><a href="#" className="hover:text-white transition-colors">Politique de confidentialité</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">CGV</a></li>
+                <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
           </div>
