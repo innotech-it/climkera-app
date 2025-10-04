@@ -234,24 +234,27 @@ function App() {
       >
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src={logoImage} alt="CLIMKÉRA" className="h-10 w-auto" />
+            <a href="#accueil">
+              <img src={logoImage} alt="CLIMKÉRA" className="h-10 w-auto" />
+            </a>
           </div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#accueil" className="text-gray-700 hover:text-blue-600 transition-colors">Accueil</a>
-            <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-            <a href="#packs" className="text-gray-700 hover:text-blue-600 transition-colors">Packs</a>
-            <a href="#temoignages" className="text-gray-700 hover:text-blue-600 transition-colors">Témoignages</a>
-            <a href="#faq" className="text-gray-700 hover:text-blue-600 transition-colors">FAQ</a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
-            <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">Prise de rendez-vous</a>
+            <a href="#accueil" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Accueil</a>
+            <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Services</a>
+            <a href="#packs" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Packs</a>
+            <a href="#temoignages" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Témoignages</a>
+            <a href="#faq" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">FAQ</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
+            <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium">Prise de rendez-vous</a>
           </nav>
           
           {/* Mobile menu button */}
           <button 
             className="md:hidden text-gray-700 focus:outline-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6" />
@@ -274,42 +277,42 @@ function App() {
               <div className="px-4 py-2 space-y-1">
                 <a 
                   href="#accueil" 
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Accueil
                 </a>
                 <a 
                   href="#services" 
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Services
                 </a>
                 <a 
                   href="#packs" 
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Packs
                 </a>
                 <a 
                   href="#temoignages" 
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Témoignages
                 </a>
                 <a 
                   href="#faq" 
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   FAQ
                 </a>
                 <a 
                   href="#contact" 
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Contact
@@ -318,7 +321,7 @@ function App() {
               <div className="px-4 py-4 border-t border-gray-200">
                 <a 
                   href="#contact" 
-                  className="block w-full bg-blue-600 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  className="block w-full bg-blue-600 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Prise de rendez-vous
@@ -358,12 +361,12 @@ function App() {
                 CLIMKÉRA est une entreprise locale spécialisée dans l'installation, l'entretien et le dépannage de systèmes de climatisation, adaptée aux besoins des particuliers et professionnels en Guadeloupe.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg rounded-md font-medium transition-colors">
+                <a href="#contact" className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg rounded-md font-medium transition-colors text-center">
                   Demander un devis
-                </button>
-                <button className="border-2 border-white text-white hover:bg-white/10 px-8 py-4 text-lg rounded-md font-medium transition-colors">
+                </a>
+                <a href="#contact" className="border-2 border-white text-white hover:bg-white/10 px-8 py-4 text-lg rounded-md font-medium transition-colors text-center">
                   Prendre RDV
-                </button>
+                </a>
               </div>
             </motion.div>
             
@@ -442,7 +445,7 @@ function App() {
                     <div className="text-2xl font-bold text-blue-600 mb-4">
                       {item.prix}
                     </div>
-                    <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Découvrir</button>
+                    <a href="#contact" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors text-center block">Découvrir</a>
                   </div>
                 </div>
               </motion.div>
@@ -553,7 +556,7 @@ function App() {
                   </ul>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-blue-600 mb-4">À partir de 3499€</div>
-                    <button className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors">Découvrir</button>
+                    <a href="#contact" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors text-center block">Découvrir</a>
                   </div>
                 </div>
               </div>
@@ -584,7 +587,7 @@ function App() {
                   </ul>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-green-600 mb-4">À partir de 2899€</div>
-                    <button className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors">Découvrir</button>
+                    <a href="#contact" className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors text-center block">Découvrir</a>
                   </div>
                 </div>
               </div>
@@ -986,14 +989,20 @@ function App() {
                   </div>
                   
                   <div className="flex gap-4 pt-4">
-                    <button className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center">
+                    <a 
+                      href="tel:0690970404" 
+                      className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center"
+                    >
                       <Phone className="w-4 h-4 mr-2" />
                       Nous appeler
-                    </button>
-                    <button className="flex-1 border-2 border-green-600 text-green-600 py-2 rounded-md hover:bg-green-50 transition-colors flex items-center justify-center">
+                    </a>
+                    <a 
+                      href="mailto:climkera@gmail.com" 
+                      className="flex-1 border-2 border-green-600 text-green-600 py-2 rounded-md hover:bg-green-50 transition-colors flex items-center justify-center"
+                    >
                       <Mail className="w-4 h-4 mr-2" />
                       Nous écrire
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -1001,12 +1010,19 @@ function App() {
             
             <motion.div 
               variants={fadeInUp}
-              className="h-96 bg-gray-200 rounded-lg flex items-center justify-center"
+              className="h-96 rounded-lg overflow-hidden"
             >
-              <div className="text-center text-gray-500">
-                <MapPin className="w-16 h-16 mx-auto mb-4" />
-                <p className="text-lg">Carte Google Maps</p>
-                <p className="text-sm">ZAC de Houelbourg 1, Baie-Mahault</p>
+              <iframe 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-61.565,16.251,-61.558,16.256&amp;layer=mapnik&amp;marker=16.2531281,-61.5614545" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 'none' }}
+                title="Carte OpenStreetMap - CLIMKÉRA"
+              ></iframe>
+              <div className="absolute bottom-0 left-0 bg-white/80 backdrop-blur-sm p-2 text-xs text-gray-700">
+                <a href="https://www.openstreetmap.org/?mlat=16.2531281&amp;mlon=-61.5614545#map=17/16.2531281/-61.5614545" target="_blank" rel="noopener noreferrer">
+                  Voir en plus grand (© OpenStreetMap)
+                </a>
               </div>
             </motion.div>
           </div>
