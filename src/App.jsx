@@ -1124,7 +1124,7 @@ function App() {
                 style={{ border: 'none' }}
                 title="Carte OpenStreetMap - CLIMKÉRA"
               ></iframe>
-              <div className="absolute bottom-0 left-0 bg-white/80 backdrop-blur-sm p-2 text-xs text-gray-700">
+              <div className="absolute bottom-0 left-0 bg-white/80 backdrop-blur-sm p-2 text-xs text-gray-700 hidden">
                 <a href="https://www.openstreetmap.org/?mlat=16.2531281&amp;mlon=-61.5614545#map=17/16.2531281/-61.5614545" target="_blank" rel="noopener noreferrer">
                   Voir en plus grand (© OpenStreetMap)
                 </a>
