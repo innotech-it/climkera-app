@@ -31,6 +31,7 @@ import {
 import logoImage from './assets/logo.jpeg'
 import videoBackground from './assets/climatisation-guadeloupe.mp4'
 import reparationImage from './assets/reparation-climatisation-guadeloupe.webp'
+import chauffeEauImage from './assets/chauffe-eau-solaire.webp'
 import './App.css'
 
 function App() {
@@ -520,6 +521,9 @@ function App() {
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
               Parce que le confort passe aussi par l'énergie et la sécurité, CLIMKÉRA vous propose des services adaptés
             </p>
+            <div className="mt-8">
+              <img src={chauffeEauImage} alt="Chauffe-eau solaire Guadeloupe" className="w-[600px] h-auto mx-auto rounded-lg shadow-lg mb-6" />
+            </div>
           </motion.div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
