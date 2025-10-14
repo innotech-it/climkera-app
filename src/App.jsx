@@ -71,28 +71,28 @@ function App() {
     {
       btu: "9000 BTU",
       description: "Idéale pour chambres et petits espaces",
-      prix: "À partir de 899€",
+      prix: "À partir de 599€",
       icon: <Snowflake className="w-8 h-8 text-blue-500" />,
       color: "bg-blue-50 border-blue-200"
     },
     {
       btu: "12000 BTU",
       description: "Adaptée aux salons et bureaux moyens",
-      prix: "À partir de 1199€",
+      prix: "À partir de 675€",
       icon: <Snowflake className="w-8 h-8 text-green-500" />,
       color: "bg-green-50 border-green-200"
     },
     {
       btu: "18000 BTU",
       description: "Parfaite pour grands séjours ou locaux professionnels",
-      prix: "À partir de 1599€",
+      prix: "À partir de 775€",
       icon: <Snowflake className="w-8 h-8 text-orange-500" />,
       color: "bg-orange-50 border-orange-200"
     },
     {
       btu: "24000 BTU",
       description: "Conçue pour les espaces volumineux et collectifs",
-      prix: "À partir de 2199€",
+      prix: "À partir de 1299€",
       icon: <Snowflake className="w-8 h-8 text-purple-500" />,
       color: "bg-purple-50 border-purple-200"
     }
@@ -464,12 +464,12 @@ function App() {
             </p>
             <div className="mt-8">
               <img src={reparationImage} alt="Réparation climatisation Guadeloupe" className="w-[600px] h-auto mx-auto rounded-lg shadow-lg mb-6" />
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Nos experts sélectionnent pour vous les meilleurs équipements adaptés à votre espace et à votre budget. 
-                Chaque installation est réalisée avec soin par notre équipe certifiée pour garantir votre confort et votre sécurité. 
-                Profitez d'une fraîcheur optimale toute l'année grâce à nos solutions sur mesure.
-              </p>
             </div>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+              Nos experts sélectionnent pour vous les meilleurs équipements adaptés à votre espace et à votre budget. 
+              Chaque installation est réalisée avec soin par notre équipe certifiée pour garantir votre confort et votre sécurité. 
+              Profitez d'une fraîcheur optimale toute l'année grâce à nos solutions sur mesure.
+            </p>
           </motion.div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
